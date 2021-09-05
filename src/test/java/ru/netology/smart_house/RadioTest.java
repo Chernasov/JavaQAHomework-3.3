@@ -11,7 +11,9 @@ class RadioTest {
 
     @ParameterizedTest
     @CsvSource({"under min station, -1, 0",
+                "equally min station, 0, 0",
                 "over max station, 12, 9",
+                "equally max station, 9, 9",
                 "station in range, 5, 5"})
     void shouldRadioSetStation(String test, int numberStation, int expected) {
         sven.setCurrentStation(numberStation);
