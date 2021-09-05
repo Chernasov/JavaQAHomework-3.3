@@ -49,7 +49,7 @@ class RadioTest {
 
     @Test
     void shouldRadioDecreaseStation() {
-        int currentStation = 1;
+        int currentStation = 5;
         sven.setCurrentStation(currentStation);
         sven.decreaseStation();
         int newStation = sven.getCurrentStation();
