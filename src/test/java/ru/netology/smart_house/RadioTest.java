@@ -1,49 +1,26 @@
 package ru.netology.smart_house;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
     Radio sven = new Radio();
 
-    @Test
-    void shouldIncreaseVolume() {
-        sven.increaseVolume();
-        int volume = sven.getCurrentVolume();
-        int expected = 1;
-        assertEquals(expected, volume);
+    @ParameterizedTest
+    @CsvSource({"under min station, -1, 0",
+                "over max station, 12, 9",
+                "station in range, 5, 5"})
+    void shouldRadioSetStation(String test, int numberStation, int expected) {
+        sven.setCurrentStation(numberStation);
+        int actual = sven.getCurrentStation();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void shouldMaxVolume() {
-        int maxVolume = sven.getMaxVolume();
-        sven.setCurrentVolume(maxVolume);
-        sven.increaseVolume();
-        int currentVolume = sven.getCurrentVolume();
-        assertEquals(maxVolume, currentVolume);
-    }
-
-    @Test
-    void shouldMinVolume() {
-        int minVolume = sven.getMinVolume();
-        sven.decreaseVolume();
-        int currentVolume = sven.getCurrentVolume();
-        assertEquals(minVolume, currentVolume);
-    }
-
-    @Test
-    void shouldDecreaseVolume() {
-        int currentVolume = 8;
-        sven.setCurrentVolume(currentVolume);
-        sven.decreaseVolume();
-        int newVolume = sven.getCurrentVolume();
-        int expected = currentVolume - 1;
-        assertEquals(expected, newVolume);
-    }
-
-    @Test
-    void shouldIncreaseStation() {
+    void shouldRadioIncreaseStation() {
         sven.increaseStation();
         int station = sven.getCurrentStation();
         int expected = 1;
@@ -51,7 +28,7 @@ class RadioTest {
     }
 
     @Test
-    void shouldMaxStation() {
+    void shouldRadioMaxStation() {
         int maxStation = sven.getMaxStation();
         sven.setCurrentStation(maxStation);
         sven.increaseStation();
@@ -61,7 +38,7 @@ class RadioTest {
     }
 
     @Test
-    void shouldMinStation() {
+    void shouldRadioMinStation() {
         int maxStation = sven.getMaxStation();
         sven.decreaseStation();
         int currentStation = sven.getCurrentStation();
@@ -69,12 +46,57 @@ class RadioTest {
     }
 
     @Test
-    void shouldDecreaseStation() {
-        int currentStation = 6;
+    void shouldRadioDecreaseStation() {
+        int currentStation = 1;
         sven.setCurrentStation(currentStation);
         sven.decreaseStation();
         int newStation = sven.getCurrentStation();
         int expected = currentStation - 1;
         assertEquals(expected, newStation);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"under min volume, -1, 0",
+                "over max volume, 11, 10",
+                "volume in range, 7, 7"})
+    void shouldRadioSetVolume(String test, int numberVolume, int expected) {
+        sven.setCurrentVolume(numberVolume);
+        int actual = sven.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldRadioIncreaseVolume() {
+        sven.increaseVolume();
+        int volume = sven.getCurrentVolume();
+        int expected = 1;
+        assertEquals(expected, volume);
+    }
+
+    @Test
+    void shouldRadioMaxVolume() {
+        int maxVolume = sven.getMaxVolume();
+        sven.setCurrentVolume(maxVolume);
+        sven.increaseVolume();
+        int currentVolume = sven.getCurrentVolume();
+        assertEquals(maxVolume, currentVolume);
+    }
+
+    @Test
+    void shouldRadioMinVolume() {
+        int minVolume = sven.getMinVolume();
+        sven.decreaseVolume();
+        int currentVolume = sven.getCurrentVolume();
+        assertEquals(minVolume, currentVolume);
+    }
+
+    @Test
+    void shouldRadioDecreaseVolume() {
+        int currentVolume = 7;
+        sven.setCurrentVolume(currentVolume);
+        sven.decreaseVolume();
+        int newVolume = sven.getCurrentVolume();
+        int expected = currentVolume - 1;
+        assertEquals(expected, newVolume);
     }
 }
