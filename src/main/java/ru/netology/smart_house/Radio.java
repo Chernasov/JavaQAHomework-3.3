@@ -1,24 +1,43 @@
 package ru.netology.smart_house;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Radio {
-    private int currentStation;
-    private int maxStation = 9;
+    private int countStation = 10;
+    private int currentStation = countStation / 2;
+    private int maxStation = countStation - 1;
     private int minStation = 0;
-    private int currentVolume;
-    private int maxVolume = 10;
+    private int currentVolume = 25;
+    private int maxVolume = 100;
     private int minVolume = 0;
 
-    public int getMaxStation() {
-        return maxStation;
+//    public Radio() {
+//    }
+
+    public Radio(int countStation) {
+        this.countStation = countStation;
     }
 
-    public int getMinStation() {
-        return minStation;
-    }
+//    public int getCountStation() {
+//        return countStation;
+//    }
 
-    public int getCurrentStation() {
-        return currentStation;
-    }
+//    public int getMaxStation() {
+//        return maxStation;
+//    }
+
+//    public int getMinStation() {
+//        return minStation;
+//    }
+
+//    public int getCurrentStation() {
+//        return currentStation;
+//    }
 
     public void setCurrentStation(int currentStation) {
         if (currentStation > maxStation) {
@@ -48,17 +67,17 @@ public class Radio {
         }
     }
 
-    public int getMaxVolume() {
-        return maxVolume;
-    }
+//    public int getMaxVolume() {
+//        return maxVolume;
+//    }
 
-    public int getMinVolume() {
-        return minVolume;
-    }
+//    public int getMinVolume() {
+//        return minVolume;
+//    }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
+//    public int getCurrentVolume() {
+//        return currentVolume;
+//    }
 
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume > maxVolume) {
