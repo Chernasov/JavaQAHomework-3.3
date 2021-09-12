@@ -1,12 +1,24 @@
 package ru.netology.smart_house;
 
 public class Radio {
-    private int currentStation;
-    private int maxStation = 9;
+    private int countStation = 10;
+    private int currentStation = countStation / 2;
+    private int maxStation = countStation - 1;
     private int minStation = 0;
-    private int currentVolume;
-    private int maxVolume = 10;
+    private int currentVolume = 25;
+    private int maxVolume = 100;
     private int minVolume = 0;
+
+    public Radio() {
+    }
+
+    public Radio(int countStation) {
+        this.countStation = countStation;
+    }
+
+    public int getCountStation() {
+        return countStation;
+    }
 
     public int getMaxStation() {
         return maxStation;
