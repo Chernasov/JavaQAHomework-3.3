@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
-    Radio sven = new Radio();
+//    Radio sven = new Radio();
 
     @ParameterizedTest
     @CsvSource({"under min station, -1, 0",
@@ -16,21 +16,45 @@ class RadioTest {
                 "equally max station, 9, 9",
                 "station in range, 5, 5"})
     void shouldRadioSetStation(String test, int numberStation, int expected) {
+        Radio sven = new Radio();
+        sven.setCurrentStation(numberStation);
+        int actual = sven.getCurrentStation();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "under min station, 25, -1, 0",
+            "equally min station, 18, 0, 0",
+            "over max station, 8, 12, 7",
+            "equally max station, 12, 11, 11",
+            "station in range, 20, 15, 15"})
+    void shouldRadioSetStationWithSetCountStation(String test, int countStation, int numberStation, int expected) {
+        Radio sven = new Radio(countStation);
         sven.setCurrentStation(numberStation);
         int actual = sven.getCurrentStation();
         assertEquals(expected, actual);
     }
 
     @Test
+    void sholdRadioSetCountStation() {
+        Radio pioneer = new Radio(20);
+        assertEquals(20, pioneer.getCountStation());
+    }
+
+
+    @Test
     void shouldRadioIncreaseStation() {
+        Radio sven = new Radio();
         sven.increaseStation();
         int station = sven.getCurrentStation();
-        int expected = 1;
+        int expected = 6;
         assertEquals(expected, station);
     }
 
     @Test
     void shouldRadioMaxStation() {
+        Radio sven = new Radio();
         int maxStation = sven.getMaxStation();
         sven.setCurrentStation(maxStation);
         sven.increaseStation();
@@ -40,15 +64,39 @@ class RadioTest {
     }
 
     @Test
+    void shouldRadioMaxStationWithSetCountStation() {
+        Radio pioner = new Radio(19);
+        int maxStation = pioner.getMaxStation();
+        pioner.setCurrentStation(maxStation);
+        pioner.increaseStation();
+        int currentStation = pioner.getCurrentStation();
+        int minStation = pioner.getMinStation();
+        assertEquals(minStation, currentStation);
+    }
+
+    @Test
     void shouldRadioMinStation() {
+        Radio sven = new Radio();
         int maxStation = sven.getMaxStation();
+        sven.setCurrentStation(sven.getMinStation());
         sven.decreaseStation();
         int currentStation = sven.getCurrentStation();
         assertEquals(maxStation, currentStation);
     }
 
     @Test
+    void shouldRadioMinStationWithSetCountStation() {
+        Radio pioneer = new Radio(6);
+        int maxStation = pioneer.getMaxStation();
+        pioneer.setCurrentStation(pioneer.getMinStation());
+        pioneer.decreaseStation();
+        int currentStation = pioneer.getCurrentStation();
+        assertEquals(maxStation, currentStation);
+    }
+
+    @Test
     void shouldRadioDecreaseStation() {
+        Radio sven = new Radio();
         int currentStation = 5;
         sven.setCurrentStation(currentStation);
         sven.decreaseStation();
@@ -59,9 +107,10 @@ class RadioTest {
 
     @ParameterizedTest
     @CsvSource({"under min volume, -1, 0",
-                "over max volume, 11, 10",
+                "over max volume, 101, 100",
                 "volume in range, 7, 7"})
     void shouldRadioSetVolume(String test, int numberVolume, int expected) {
+        Radio sven = new Radio();
         sven.setCurrentVolume(numberVolume);
         int actual = sven.getCurrentVolume();
         assertEquals(expected, actual);
@@ -69,14 +118,16 @@ class RadioTest {
 
     @Test
     void shouldRadioIncreaseVolume() {
+        Radio sven = new Radio();
         sven.increaseVolume();
         int volume = sven.getCurrentVolume();
-        int expected = 1;
+        int expected = 26;
         assertEquals(expected, volume);
     }
 
     @Test
     void shouldRadioMaxVolume() {
+        Radio sven = new Radio();
         int maxVolume = sven.getMaxVolume();
         sven.setCurrentVolume(maxVolume);
         sven.increaseVolume();
@@ -86,7 +137,9 @@ class RadioTest {
 
     @Test
     void shouldRadioMinVolume() {
+        Radio sven = new Radio();
         int minVolume = sven.getMinVolume();
+        sven.setCurrentVolume(0);
         sven.decreaseVolume();
         int currentVolume = sven.getCurrentVolume();
         assertEquals(minVolume, currentVolume);
@@ -94,6 +147,7 @@ class RadioTest {
 
     @Test
     void shouldRadioDecreaseVolume() {
+        Radio sven = new Radio();
         int currentVolume = 7;
         sven.setCurrentVolume(currentVolume);
         sven.decreaseVolume();
