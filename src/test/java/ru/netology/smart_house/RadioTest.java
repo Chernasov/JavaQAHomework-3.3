@@ -22,6 +22,20 @@ class RadioTest {
         assertEquals(expected, actual);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "under min station, 25, -1, 0",
+            "equally min station, 18, 0, 0",
+            "over max station, 8, 12, 7",
+            "equally max station, 12, 11, 11",
+            "station in range, 20, 15, 15"})
+    void shouldRadioSetStationWithSetCountStation(String test, int countStation, int numberStation, int expected) {
+        Radio sven = new Radio(countStation);
+        sven.setCurrentStation(numberStation);
+        int actual = sven.getCurrentStation();
+        assertEquals(expected, actual);
+    }
+
     @Test
     void sholdRadioSetCountStation() {
         Radio pioneer = new Radio(20);
